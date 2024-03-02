@@ -1,0 +1,16 @@
+{
+  "produtos": [
+    {
+      "id": "1219",
+      "nomeProduto": "uva",
+      "preco": "4",
+      "quantidade": "22"
+    },
+    {
+      "id": "1054",
+      "nomeProduto": "bana",
+      "preco": "10",
+      "quantidade": "22"
+    }
+  ]
+}

@@ -2,14 +2,14 @@ const nomeProdutoDoProduto = document.getElementById("productName") as HTMLInput
 const precoProduto = document.getElementById("productPrice") as HTMLInputElement
 const quantidadeProduto = document.getElementById("productQuantity") as HTMLInputElement
 
-
 interface Mercadorias {
-  nomeProduto: string,
-  preco: string,
-  quantidade: string
+  nomeProduto: string;
+  preco: string;
+  quantidade: string;
 }
 
-let bancoDeDados: Mercadorias[] = []
+let contador = 0
+
 
 const cadastrarProdutos = () => {
   const mercadorias: Mercadorias = {
@@ -17,12 +17,21 @@ const cadastrarProdutos = () => {
     preco: precoProduto.value,
     quantidade: quantidadeProduto.value,
   };
+  requsicaoPost(mercadorias);
+};
 
-  bancoDeDados.push(mercadorias);
-  const converter = JSON.stringify(bancoDeDados)
-  localStorage.setItem("dadosClientes", converter)
-  const valorSalvo = JSON.parse(localStorage.getItem("dadosClientes") ?? "{}");
-  bancoDeDados.push(valorSalvo)
+const requsicaoPost = (objeto: {}) => {
+  fetch("http://localhost:3000/produtos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(objeto),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 };
 
 const botaoCadastrar = document
