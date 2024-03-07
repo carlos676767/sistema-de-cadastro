@@ -30,6 +30,7 @@ const requsicaoPostAdicionarProdutos = (objeto: {}) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      mensagemProdutoCadastrado()
     });
 };
 
@@ -42,11 +43,37 @@ const mensagemVazio = () => {
   });
 };
 
+const mensagemValorNaoEncontrado = () => {
+  Swal.fire({
+    title: "Oops...",
+    text: "Produto não encontrado",
+    icon: "error"
+  });
+}
+
+const mensagemProdutoDeletado = () => {
+  Swal.fire({
+    title: "Sucesso!",
+    text: "Produto deletado com sucesso",
+    icon: "success"
+  });
+}
+
+const mensagemProdutoCadastrado = () => {
+  Swal.fire({
+    title: "Sucesso!",
+    text: "Produto cadastrado com sucesso",
+    icon: "info" 
+  });
+}
+
+
 const botaoPesquisar = document.getElementById("botao-pesquisar") as HTMLButtonElement;
 const deltarProduto = document.getElementById("deltar-produto") as HTMLButtonElement;
 const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
 let produtosSelecionados: any
-const productList = document.querySelector("ul") as HTMLUListElement; 
+const tabela = document.querySelectorAll("td") 
+
 const buscarProdutoPorNome = () => {
   if (buscarProdutoInput.value === "") {
     mensagemVazio();
@@ -58,27 +85,18 @@ const buscarProdutoPorNome = () => {
         console.log(data[0].nomeProduto);
         data.forEach(element => {
         let produto = `
-        <div>
-             <i class="fa-solid fa-cube"></i>${JSON.stringify(element.nomeProduto).replace(/"/g, "")}
-           </div>
-           <div>
-               <i class="fa-solid fa-sack-dollar"></i>${JSON.stringify(element.preco).replace(/"/g, "")}
-           </div>
-           <div>
-               <i class="fa-solid fa-chart-column"></i>${JSON.stringify(element.quantidade).replace(/"/g, "")}
-           </div>
-           <div>
-           <button id="deltar-produto">Deletar</button>
-       </div>
+        ${tabela[0].innerHTML =  JSON.stringify(element.nomeProduto).replace(/"/g, "")}
+        ${tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g, "")}
+        ${tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g, "")}
         `
         produtos.push(produto)
         })
-        productList.innerHTML = produtos
         produtosSelecionados = data[0]
-        deltarProduto.style.display = "block";
       })
       .catch((error) => {
-        (productList.textContent = "Produto não encontrado"), error;
+        console.log(error);
+        mensagemValorNaoEncontrado()
+
       });
   }
 };
@@ -86,11 +104,14 @@ const buscarProdutoPorNome = () => {
 const deletarProduto = () => {
   fetch(
     `http://localhost:3000/produtos/${produtosSelecionados.id}`,
-    { method: "DELETE", })
+    { method: "DELETE" })
     .then((response) => {
       if (response.ok) {
+        mensagemProdutoDeletado()
         console.log("Item excluído com sucesso");
-        productList.textContent = ""
+        tabela.forEach(element => {
+          element.textContent = ''
+        });
       } else {
         console.error("Erro ao excluir o item");
       }
@@ -107,6 +128,7 @@ deltarProduto.addEventListener("click", () => {
 botaoPesquisar.addEventListener("click", () => {
   buscarProdutoPorNome();
 });
+
 
 const botaoCadastrar = document
   .getElementById("botaoCadastrar")

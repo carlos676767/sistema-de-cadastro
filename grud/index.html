@@ -31,15 +31,32 @@
         </section>
 
        
+        <section class="container">     
         <section class="container">
-            <h2>Produtos</h2>
-            <ul id="productList">
-
-            </ul>
+            <h2>Produtos Cadastrados</h2>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Nome do Produto</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Deletar produto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="Nome do Produto"></td>
+                        <td data-label="Preço"></td>
+                        <td data-label="Quantidade"></td>
+                        <td data-label="Deletar produto"><button class="delete-button" id="deltar-produto">Deletar</button></td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+        </section>
             <div>
                 <input type="text" id="searchInput" placeholder="Pesquisar por nome do produto">
                 <button id="botao-pesquisar">Pesquisar</button>
-                <button id="deltar-produto">deletar produto</button>
             </div>
           
             <div>
@@ -51,13 +68,6 @@
                 <input type="text" id="criteriaInput">
                 <button >Pesquisar</button>
             </div>
-        </section>
-
-        <section class="container" id="productTab" style="display: none;">
-            <h2>Produtos Cadastrados</h2>
-            <ul id="registeredProducts">
-                <!-- Aqui serão exibidos os produtos cadastrados -->
-            </ul>
         </section>
     </main>
     <footer>
