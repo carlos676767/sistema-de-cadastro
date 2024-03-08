@@ -11,12 +11,16 @@ interface Mercadorias {
 }
 
 const cadastrarProdutos = () => {
-  const mercadorias: Mercadorias = {
-    nomeProduto: nomeProdutoDoProduto.value,
-    preco: precoProduto.value,
-    quantidade: quantidadeProduto.value,
-  };
-  requsicaoPostAdicionarProdutos(mercadorias);
+  if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
+    mensagemVazio()
+  }else{
+    const mercadorias: Mercadorias = {
+      nomeProduto: nomeProdutoDoProduto.value,
+      preco: precoProduto.value,
+      quantidade: quantidadeProduto.value,
+    };
+    requsicaoPostAdicionarProdutos(mercadorias);
+  }
 };
 
 const requsicaoPostAdicionarProdutos = (objeto: {}) => {
@@ -86,8 +90,8 @@ const buscarProdutoPorNome = () => {
         data.forEach(element => {
         let produto = `
         ${tabela[0].innerHTML =  JSON.stringify(element.nomeProduto).replace(/"/g, "")}
-        ${tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g, "")}
-        ${tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g, "")}
+        ${tabela[1].innerHTML =  JSON.stringify(element.preco).replace(/"/g, "")}
+        ${tabela[2].innerHTML =  JSON.stringify(element.quantidade).replace(/"/g, "")}
         `
         produtos.push(produto)
         })
