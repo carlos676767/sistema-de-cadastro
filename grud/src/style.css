@@ -100,6 +100,21 @@ th {
   color: white;
 }
 
+.imagens{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px
+  ;
+}
+#imagemProduto{
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
 
 @media screen and (max-width: 768px) {
   table {

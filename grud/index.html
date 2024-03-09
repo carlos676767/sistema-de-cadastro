@@ -26,6 +26,10 @@
         <div class="form-group">
             <label for="productQuantity">Quantidade:</label>
             <input type="number" id="productQuantity" name="productQuantity" min="0" step="1" >
+            <div class="imagens">
+                <label for="text">Imagem produto:</label>
+                <img src="" alt="" id="imagemProduto">
+            </div>
         </div>
         <button type="submit" id="botaoCadastrar">Cadastrar Produto</button>
         </section>
@@ -65,8 +69,8 @@
                     <option value="price">Preço do Produto</option>
                     <option value="quantity">Quantidade</option>
                 </select>
-                <input type="text" id="criteriaInput">
-                <button >Pesquisar</button>
+                <input type="number" id="criteriaInput">
+                <button id="botao-pequisar-criterios">Pesquisar</button>
             </div>
         </section>
     </main>
