@@ -8,7 +8,21 @@ interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
+  data: string
 }
+
+
+
+const obterDataEHoraAtual = () => {
+  const agora = new Date()
+  const dataAtual = agora.getHours().toString().padStart(2, "0")
+  const minutos = agora.getMinutes().toString().padStart(2, "0");
+  const segundos = agora.getSeconds().toString().padStart(2, "0")
+  const horario = `${dataAtual}:${minutos}:${segundos}`
+  return horario
+}
+
+
 
 const cadastrarProdutos = () => {
   if ( nomeProdutoDoProduto.value === "" &&precoProduto.value === "" && quantidadeProduto.value === "") {
@@ -18,23 +32,13 @@ const cadastrarProdutos = () => {
       nomeProduto: nomeProdutoDoProduto.value,
       preco: precoProduto.value,
       quantidade: quantidadeProduto.value,
+      data: obterDataEHoraAtual()
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
 };
 
 
-  nomeProdutoDoProduto.addEventListener("input", () => {
-    const imagemProduto = document.getElementById("imagemProduto") as HTMLImageElement
-    fetch(`https://api.unsplash.com/photos/random?query=${nomeProdutoDoProduto.value}&client_id=47jhOV5e1cn6V3CwVPBw03RP7luThokL663nIOpWheo`)
-    .then(response => response.json())
-    .then(data => {
-      imagemProduto.src = data.urls.regular
-    })
-    .catch(erro => {
-      console.error(erro)
-    })
-  })
 
 
 const requsicaoPostAdicionarProdutos = (objeto: {}) => {
@@ -99,23 +103,13 @@ const buscarProdutoPorNome = () => {
       .then((response) => response.json())
       .then((data: Array<any>) => {
         let produtos: any = [];
-        console.log(data[0].nomeProduto);
         data.forEach((element) => {
-          let produto = `
-        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(
-          /"/g,
-          ""
-        ))}
-        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(
-          /"/g,
-          ""
-        ))}
-        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(
-          /"/g,
-          ""
-        ))}
-        `;
-          produtos.push(produto);
+        let produto = `
+        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace( /"/g,"" ))}
+        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace( /"/g,""))}
+        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace( /"/g,  "" ))}
+        ${tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, "")}`;
+        produtos.push(produto);
         });
         produtosSelecionados = data[0];
       })

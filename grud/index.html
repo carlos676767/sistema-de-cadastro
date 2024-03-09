@@ -26,10 +26,6 @@
         <div class="form-group">
             <label for="productQuantity">Quantidade:</label>
             <input type="number" id="productQuantity" name="productQuantity" min="0" step="1" >
-            <div class="imagens">
-                <label for="text">Imagem produto:</label>
-                <img src="" alt="" id="imagemProduto">
-            </div>
         </div>
         <button type="submit" id="botaoCadastrar">Cadastrar Produto</button>
         </section>
@@ -44,6 +40,7 @@
                         <th>Nome do Produto</th>
                         <th>Preço</th>
                         <th>Quantidade</th>
+                        <th>data de cadastramento</th>
                         <th>Deletar produto</th>
                       </tr>
                     </thead>
@@ -52,9 +49,9 @@
                         <td data-label="Nome do Produto"></td>
                         <td data-label="Preço"></td>
                         <td data-label="Quantidade"></td>
+                        <td data-label="data"></td>
                         <td data-label="Deletar produto"><button class="delete-button" id="deltar-produto">Deletar</button></td>
                       </tr>
-                      
                     </tbody>
                   </table>
         </section>
