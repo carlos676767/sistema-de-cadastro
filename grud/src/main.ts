@@ -23,23 +23,40 @@ const obterDataEHoraAtual = () => {
   return horario
 }
 
+
+let receberTraducao: string 
+const traduzirInput = () => {
+  fetch(`https://api.mymemory.translated.net/get?q=${nomeProdutoDoProduto.value}&langpair=pt|en`)
+  .then(response => response.json())
+  .then(data => {
+    receberTraducao = data.responseData.translatedText
+    console.log(receberTraducao);
+    
+  })
+  .catch(error => {
+    console.error("Erro ao traduzir:", error);
+  });
+}
+
+
 let receberUrlImagem: any
+
 const carregarImagemProduto = () => {
-  fetch(`https://api.unsplash.com/photos/random?query=${nomeProdutoDoProduto.value}&client_id=47jhOV5e1cn6V3CwVPBw03RP7luThokL663nIOpWheo`)
+  fetch(`https://api.unsplash.com/photos/random?query=apple&client_id=47jhOV5e1cn6V3CwVPBw03RP7luThokL663nIOpWheo`)
   .then(response => response.json())
   .then(data => {
    receberUrlImagem = data.urls.regular;
   })
   .catch(error => {
-    console.error(error)
+    console.error(error);
   })
 }
 
-carregarImagemProduto()
+carregarImagemProduto();
 
 
 const cadastrarProdutos = () => {
-  if (nomeProdutoDoProduto.value === "" &&precoProduto.value === "" && quantidadeProduto.value === "") {
+  if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
     mensagemVazio();
   } else {
     const mercadorias: Mercadorias = {
@@ -52,8 +69,6 @@ const cadastrarProdutos = () => {
     requsicaoPostAdicionarProdutos(mercadorias);
   }
 };
-
-
 
 
 const requsicaoPostAdicionarProdutos = (objeto: {}) => {
@@ -137,7 +152,6 @@ const buscarProdutoPorNome = () => {
   }
 };
 
-
 const limparResultados = () => {
   tabela[0].innerHTML = "";
   tabela[1].innerHTML = "";
@@ -145,6 +159,7 @@ const limparResultados = () => {
   tabela[3].innerHTML = "";
   tabela[4].innerHTML = "";
 };
+
 
 const deletarProduto = () => {
   fetch(`http://localhost:3000/produtos/${produtosSelecionados.id}`, {
@@ -164,16 +179,21 @@ const deletarProduto = () => {
     });
 };
 
+
 deltarProduto.addEventListener("click", () => {
   deletarProduto();
 });
+
 
 botaoPesquisar.addEventListener("click", () => {
   buscarProdutoPorNome();
 });
 
+
+
 const botaoCadastrar = document
   .getElementById("botaoCadastrar")
   ?.addEventListener("click", () => {
     cadastrarProdutos();
+    traduzirInput()
   });
