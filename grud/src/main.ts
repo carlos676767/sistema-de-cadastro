@@ -54,7 +54,6 @@ const carregarImagemProduto = () => {
 
 carregarImagemProduto();
 
-
 const cadastrarProdutos = () => {
   if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
     mensagemVazio();
