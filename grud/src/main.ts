@@ -9,6 +9,7 @@ interface Mercadorias {
   preco: string;
   quantidade: string;
   data: string
+  imagemProduto: any
 }
 
 
@@ -22,17 +23,31 @@ const obterDataEHoraAtual = () => {
   return horario
 }
 
+let receberUrlImagem: any
+const carregarImagemProduto = () => {
+  fetch(`https://api.unsplash.com/photos/random?query=${nomeProdutoDoProduto.value}&client_id=47jhOV5e1cn6V3CwVPBw03RP7luThokL663nIOpWheo`)
+  .then(response => response.json())
+  .then(data => {
+   receberUrlImagem = data.urls.regular;
+  })
+  .catch(error => {
+    console.error(error)
+  })
+}
+
+carregarImagemProduto()
 
 
 const cadastrarProdutos = () => {
-  if ( nomeProdutoDoProduto.value === "" &&precoProduto.value === "" && quantidadeProduto.value === "") {
+  if (nomeProdutoDoProduto.value === "" &&precoProduto.value === "" && quantidadeProduto.value === "") {
     mensagemVazio();
   } else {
     const mercadorias: Mercadorias = {
       nomeProduto: nomeProdutoDoProduto.value,
       preco: precoProduto.value,
       quantidade: quantidadeProduto.value,
-      data: obterDataEHoraAtual()
+      data: obterDataEHoraAtual(),
+      imagemProduto: receberUrlImagem
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
@@ -96,6 +111,7 @@ let produtosSelecionados: any;
 const tabela = document.querySelectorAll("td");
 
 const buscarProdutoPorNome = () => {
+  const imagemDoProduto = document.querySelector("imagemDoProduto") as HTMLImageElement
   if (buscarProdutoInput.value === "") {
     mensagemVazio();
   } else {
@@ -112,12 +128,22 @@ const buscarProdutoPorNome = () => {
         produtos.push(produto);
         });
         produtosSelecionados = data[0];
+      
       })
       .catch((error) => {
         console.log(error);
         mensagemValorNaoEncontrado();
       });
   }
+};
+
+
+const limparResultados = () => {
+  tabela[0].innerHTML = "";
+  tabela[1].innerHTML = "";
+  tabela[2].innerHTML = "";
+  tabela[3].innerHTML = "";
+  tabela[4].innerHTML = "";
 };
 
 const deletarProduto = () => {
@@ -127,10 +153,8 @@ const deletarProduto = () => {
     .then((response) => {
       if (response.ok) {
         mensagemProdutoDeletado();
+        limparResultados();
         console.log("Item excluído com sucesso");
-        tabela.forEach((element) => {
-          element.textContent = "";
-        });
       } else {
         console.error("Erro ao excluir o item");
       }
@@ -147,10 +171,6 @@ deltarProduto.addEventListener("click", () => {
 botaoPesquisar.addEventListener("click", () => {
   buscarProdutoPorNome();
 });
-
-
-
-
 
 const botaoCadastrar = document
   .getElementById("botaoCadastrar")
