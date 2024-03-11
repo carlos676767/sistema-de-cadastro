@@ -9,9 +9,7 @@ interface Mercadorias {
   preco: string;
   quantidade: string;
   data: string
-  imagemProduto: any
 }
-
 
 
 const obterDataEHoraAtual = () => {
@@ -23,37 +21,6 @@ const obterDataEHoraAtual = () => {
   return horario
 }
 
-
-let receberTraducao: string 
-const traduzirInput = () => {
-  fetch(`https://api.mymemory.translated.net/get?q=${nomeProdutoDoProduto.value}&langpair=pt|en`)
-  .then(response => response.json())
-  .then(data => {
-    receberTraducao = data.responseData.translatedText
-    console.log(receberTraducao);
-    
-  })
-  .catch(error => {
-    console.error("Erro ao traduzir:", error);
-  });
-}
-
-
-let receberUrlImagem: any
-
-const carregarImagemProduto = () => {
-  fetch(`https://api.unsplash.com/photos/random?query=apple&client_id=47jhOV5e1cn6V3CwVPBw03RP7luThokL663nIOpWheo`)
-  .then(response => response.json())
-  .then(data => {
-   receberUrlImagem = data.urls.regular;
-  })
-  .catch(error => {
-    console.error(error);
-  })
-}
-
-carregarImagemProduto();
-
 const cadastrarProdutos = () => {
   if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
     mensagemVazio();
@@ -63,7 +30,6 @@ const cadastrarProdutos = () => {
       preco: precoProduto.value,
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
-      imagemProduto: receberUrlImagem
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
@@ -122,10 +88,9 @@ const botaoPesquisar = document.getElementById( "botao-pesquisar") as HTMLButton
 const deltarProduto = document.getElementById( "deltar-produto") as HTMLButtonElement;
 const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
 let produtosSelecionados: any;
-const tabela = document.querySelectorAll("td");
 
+const tabela = document.querySelectorAll("td");
 const buscarProdutoPorNome = () => {
-  const imagemDoProduto = document.querySelector("imagemDoProduto") as HTMLImageElement
   if (buscarProdutoInput.value === "") {
     mensagemVazio();
   } else {
@@ -194,5 +159,4 @@ const botaoCadastrar = document
   .getElementById("botaoCadastrar")
   ?.addEventListener("click", () => {
     cadastrarProdutos();
-    traduzirInput()
   });
