@@ -7,6 +7,30 @@
       "quantidade": "25",
       "data": "08:01:57",
       "categoriaDoproduto": "Conservas e enlatados"
+    },
+    {
+      "id": "c79e",
+      "nomeProduto": "ovos",
+      "preco": "3",
+      "quantidade": "3",
+      "data": "08:27:37",
+      "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "f3d7",
+      "nomeProduto": "lua",
+      "preco": "3",
+      "quantidade": "3",
+      "data": "08:34:46",
+      "categoriaDoproduto": "Óleos e gorduras"
+    },
+    {
+      "id": "fd00",
+      "nomeProduto": "maca",
+      "preco": "33",
+      "quantidade": "2",
+      "data": "08:35:00",
+      "categoriaDoproduto": "Ovos"
     }
   ]
 }

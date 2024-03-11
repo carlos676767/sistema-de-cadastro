@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
+import { obterValorCategoria, produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
 
 
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
@@ -159,9 +159,39 @@ botaoPesquisar.addEventListener("click", () => {
 });
 
 
-
 const botaoCadastrar = document
   .getElementById("botaoCadastrar")
   ?.addEventListener("click", () => {
     cadastrarProdutos();
   });
+
+
+  const mensagemCategoria = () => {
+    Swal.fire({
+      title: "Escolha uma Categoria",
+      text: "Por favor, selecione uma categoria antes de continuar.",
+      icon: "warning"
+    });
+  }
+  const buscaPorCriterio = () => {
+    if (!obterValorCategoria) {
+      mensagemCategoria()
+    }else{
+      fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data == false) {
+          alert("produto ")
+        }
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    }
+   
+  }
+  const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement
+  botaoPequisarCriterios.addEventListener("click", () => {
+    buscaPorCriterio()
+  })

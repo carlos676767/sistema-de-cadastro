@@ -71,7 +71,6 @@
                         <th>Preço</th>
                         <th>Quantidade</th>
                         <th>Data de cadastramento</th>
-                        <th>imagem do produto</th>
                         <th>Deletar produto</th>
                       </tr>
                     </thead>
@@ -81,7 +80,6 @@
                         <td data-label="Preço"></td>
                         <td data-label="Quantidade"></td>
                         <td data-label="data"></td>
-                        <td data-label="imagem do produto"><img src="" alt="produto" class="imagemDoProduto"></td>
                         <td data-label="Deletar produto"><button class="delete-button" id="deltar-produto">Deletar</button></td>
                       </tr>
                     </tbody>
@@ -121,7 +119,24 @@
                     <option value="Produtos vegetarianos / veganos">Produtos vegetarianos / veganos</option>
                     <option value="Suplementos alimentares">Suplementos alimentares</option>
                 </select>
-                <input type="number" id="criteriaInput">
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Nome do Produto</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Data de cadastramento</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="Nome do Produto"></td>
+                        <td data-label="Preço"></td>
+                        <td data-label="Quantidade"></td>
+                        <td data-label="data"></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 <button id="botao-pequisar-criterios">Pesquisar</button>
             </div>
         </section>
