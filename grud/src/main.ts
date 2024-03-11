@@ -1,14 +1,16 @@
 import Swal from "sweetalert2";
+import { produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
+
 
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
 const precoProduto = document.getElementById("productPrice") as HTMLInputElement;
 const quantidadeProduto = document.getElementById( "productQuantity") as HTMLInputElement;
-
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
   data: string
+  categoriaDoproduto: string
 }
 
 
@@ -30,11 +32,14 @@ const cadastrarProdutos = () => {
       preco: precoProduto.value,
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
+      categoriaDoproduto: produtoSelecionado
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
 };
 
+
+valoresSelecionados()
 
 const requsicaoPostAdicionarProdutos = (objeto: {}) => {
   fetch("http://localhost:3000/produtos", {

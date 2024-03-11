@@ -1,5 +1,12 @@
 {
   "produtos": [
-   
+    {
+      "id": "2f54",
+      "nomeProduto": "maccarao",
+      "preco": "15",
+      "quantidade": "25",
+      "data": "08:01:57",
+      "categoriaDoproduto": "Conservas e enlatados"
+    }
   ]
 }
