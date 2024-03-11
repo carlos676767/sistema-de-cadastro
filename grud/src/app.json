@@ -31,6 +31,14 @@
       "quantidade": "2",
       "data": "08:35:00",
       "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "3d5f",
+      "nomeProduto": "frango",
+      "preco": "44",
+      "quantidade": "25",
+      "data": "09:03:03",
+      "categoriaDoproduto": "Snacks e petiscos"
     }
   ]
 }

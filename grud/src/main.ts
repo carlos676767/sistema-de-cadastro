@@ -173,16 +173,25 @@ const botaoCadastrar = document
       icon: "warning"
     });
   }
+
+
+  const mensagemCategoriaNaoExiste = () => {
+    Swal.fire({
+      title: "Categoria Inválida",
+      text: "A categoria selecionada não possui produtos disponíveis.",
+      icon: "error"
+    });
+  }
   const buscaPorCriterio = () => {
     if (!obterValorCategoria) {
-      mensagemCategoria()
+      mensagemCategoria();
     }else{
       fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         if (data == false) {
-          alert("produto ")
+          mensagemCategoriaNaoExiste();
         }
       })
       .catch(error => {
