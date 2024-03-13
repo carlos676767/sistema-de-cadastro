@@ -170,7 +170,6 @@ const botaoCadastrar = document
     Swal.fire({
       title: "Escolha uma Categoria",
       text: "Por favor, selecione uma categoria antes de continuar.",
-      icon: "warning"
     });
   }
 
@@ -182,16 +181,48 @@ const botaoCadastrar = document
       icon: "error"
     });
   }
+
+
   const buscaPorCriterio = () => {
+    const thNomeProduto = document.getElementById("nomeProduto") 
+    const tdExibirPreco = document.getElementById("tdExibirPreco")
+    const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto")
+    const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto")
     if (!obterValorCategoria) {
       mensagemCategoria();
     }else{
       fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        if (data == false) {
+        if(data == false) {
           mensagemCategoriaNaoExiste();
+        }else{
+          data.forEach((element: any) => {
+            const nomeProduto = document.createElement("td")
+            nomeProduto.style.display = "block"
+            if (thNomeProduto != null) {
+              thNomeProduto.appendChild(nomeProduto)
+              nomeProduto.innerHTML = element.nomeProduto
+            }
+            const precoDoMeuProduto = document.createElement("td")
+            precoDoMeuProduto.style.display = "block"
+            if (tdExibirPreco != null) {
+              tdExibirPreco.appendChild(precoDoMeuProduto)
+              precoDoMeuProduto.innerHTML = element.preco
+            }
+            const quantidadeDoMeuProduto = document.createElement("td")
+            quantidadeDoMeuProduto.style.display = "block"
+            if (tdQuantidadeProduto != null) {
+              tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto)
+              quantidadeDoMeuProduto.innerHTML = element.quantidade
+            }
+            const dataDoMeuProduto = document.createElement("td")
+            dataDoMeuProduto.style.display = "block"
+            if (dataDoMeuProduto2 != null) {
+              dataDoMeuProduto2.appendChild(dataDoMeuProduto)
+              dataDoMeuProduto.innerHTML = element.data
+            }
+         });
         }
       })
       .catch(error => {

@@ -39,6 +39,46 @@
       "quantidade": "25",
       "data": "09:03:03",
       "categoriaDoproduto": "Snacks e petiscos"
+    },
+    {
+      "id": "f152",
+      "nomeProduto": "carlos",
+      "preco": "55",
+      "quantidade": "25",
+      "data": "07:48:23",
+      "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "83dc",
+      "nomeProduto": "maca",
+      "preco": "44",
+      "quantidade": "25",
+      "data": "06:35:38",
+      "categoriaDoproduto": "Frutas frescas"
+    },
+    {
+      "id": "f8b8",
+      "nomeProduto": "7",
+      "preco": "55",
+      "quantidade": "4",
+      "data": "06:41:53",
+      "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "8d7c",
+      "nomeProduto": "ana",
+      "preco": "22",
+      "quantidade": "4",
+      "data": "07:06:30",
+      "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "725d",
+      "nomeProduto": "teste",
+      "preco": "25",
+      "quantidade": "44",
+      "data": "07:28:42",
+      "categoriaDoproduto": "Ovos"
     }
   ]
 }
