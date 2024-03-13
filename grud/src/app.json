@@ -79,6 +79,22 @@
       "quantidade": "44",
       "data": "07:28:42",
       "categoriaDoproduto": "Ovos"
+    },
+    {
+      "id": "8d25",
+      "nomeProduto": "ovo",
+      "preco": "44",
+      "quantidade": "25",
+      "data": "07:36:45",
+      "categoriaDoproduto": "Grãos e cereais"
+    },
+    {
+      "id": "f7ae",
+      "nomeProduto": "carlos",
+      "preco": "44",
+      "quantidade": "25",
+      "data": "07:37:21",
+      "categoriaDoproduto": "Grãos e cereais"
     }
   ]
 }

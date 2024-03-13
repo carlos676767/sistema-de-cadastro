@@ -199,6 +199,7 @@ const botaoCadastrar = document
         }else{
           data.forEach((element: any) => {
             const nomeProduto = document.createElement("td")
+            nomeProduto.classList.add("tirarBorderNone")
             nomeProduto.style.display = "block"
             if (thNomeProduto != null) {
               thNomeProduto.appendChild(nomeProduto)
@@ -206,11 +207,13 @@ const botaoCadastrar = document
             }
             const precoDoMeuProduto = document.createElement("td")
             precoDoMeuProduto.style.display = "block"
+            precoDoMeuProduto.classList.add("tirarBorderNone")
             if (tdExibirPreco != null) {
               tdExibirPreco.appendChild(precoDoMeuProduto)
               precoDoMeuProduto.innerHTML = element.preco
             }
             const quantidadeDoMeuProduto = document.createElement("td")
+            quantidadeDoMeuProduto.classList.add("tirarBorderNone")
             quantidadeDoMeuProduto.style.display = "block"
             if (tdQuantidadeProduto != null) {
               tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto)
@@ -218,6 +221,7 @@ const botaoCadastrar = document
             }
             const dataDoMeuProduto = document.createElement("td")
             dataDoMeuProduto.style.display = "block"
+            dataDoMeuProduto.classList.add("tirarBorderNone")
             if (dataDoMeuProduto2 != null) {
               dataDoMeuProduto2.appendChild(dataDoMeuProduto)
               dataDoMeuProduto.innerHTML = element.data

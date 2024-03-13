@@ -116,6 +116,10 @@ th {
   width: 100px;
 }
 
+.tirarBorderNone{
+  border: none;
+}
+
 @media screen and (max-width: 768px) {
   table {
       border: 0;
