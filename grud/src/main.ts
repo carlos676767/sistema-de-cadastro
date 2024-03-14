@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { obterValorCategoria, produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
+import Chart from 'chart.js/auto';
 
 
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
@@ -159,19 +160,17 @@ botaoPesquisar.addEventListener("click", () => {
 });
 
 
-const botaoCadastrar = document
-  .getElementById("botaoCadastrar")
-  ?.addEventListener("click", () => {
-    cadastrarProdutos();
+const botaoCadastrar = document.getElementById("botaoCadastrar") as HTMLButtonElement;
+botaoCadastrar.addEventListener("click", () => {
+  cadastrarProdutos();
+});
+
+const mensagemCategoria = () => {
+  Swal.fire({
+    title: "Escolha uma Categoria",
+    text: "Por favor, selecione uma categoria antes de continuar.",
   });
-
-
-  const mensagemCategoria = () => {
-    Swal.fire({
-      title: "Escolha uma Categoria",
-      text: "Por favor, selecione uma categoria antes de continuar.",
-    });
-  }
+};
 
 
   const mensagemCategoriaNaoExiste = () => {
@@ -226,6 +225,7 @@ const botaoCadastrar = document
               dataDoMeuProduto2.appendChild(dataDoMeuProduto)
               dataDoMeuProduto.innerHTML = element.data
             }
+            
          });
         }
       })
@@ -235,6 +235,10 @@ const botaoCadastrar = document
     }
    
   }
+
+
+  
+  
   const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement
   botaoPequisarCriterios.addEventListener("click", () => {
     buscaPorCriterio()

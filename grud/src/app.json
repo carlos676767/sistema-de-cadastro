@@ -95,6 +95,14 @@
       "quantidade": "25",
       "data": "07:37:21",
       "categoriaDoproduto": "Grãos e cereais"
+    },
+    {
+      "id": "d983",
+      "nomeProduto": "55",
+      "preco": "25",
+      "quantidade": "44",
+      "data": "07:33:28",
+      "categoriaDoproduto": "Congelados"
     }
   ]
 }
