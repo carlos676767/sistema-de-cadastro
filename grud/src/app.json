@@ -1,108 +1,13 @@
 {
   "produtos": [
     {
-      "id": "2f54",
-      "nomeProduto": "maccarao",
-      "preco": "15",
-      "quantidade": "25",
-      "data": "08:01:57",
-      "categoriaDoproduto": "Conservas e enlatados"
-    },
-    {
-      "id": "c79e",
-      "nomeProduto": "ovos",
-      "preco": "3",
-      "quantidade": "3",
-      "data": "08:27:37",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "f3d7",
-      "nomeProduto": "lua",
-      "preco": "3",
-      "quantidade": "3",
-      "data": "08:34:46",
-      "categoriaDoproduto": "Óleos e gorduras"
-    },
-    {
-      "id": "fd00",
-      "nomeProduto": "maca",
-      "preco": "33",
-      "quantidade": "2",
-      "data": "08:35:00",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "3d5f",
+      "id": "e983",
       "nomeProduto": "frango",
-      "preco": "44",
-      "quantidade": "25",
-      "data": "09:03:03",
-      "categoriaDoproduto": "Snacks e petiscos"
-    },
-    {
-      "id": "f152",
-      "nomeProduto": "carlos",
-      "preco": "55",
-      "quantidade": "25",
-      "data": "07:48:23",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "83dc",
-      "nomeProduto": "maca",
-      "preco": "44",
-      "quantidade": "25",
-      "data": "06:35:38",
-      "categoriaDoproduto": "Frutas frescas"
-    },
-    {
-      "id": "f8b8",
-      "nomeProduto": "7",
-      "preco": "55",
-      "quantidade": "4",
-      "data": "06:41:53",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "8d7c",
-      "nomeProduto": "ana",
       "preco": "22",
-      "quantidade": "4",
-      "data": "07:06:30",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "725d",
-      "nomeProduto": "teste",
-      "preco": "25",
       "quantidade": "44",
-      "data": "07:28:42",
-      "categoriaDoproduto": "Ovos"
-    },
-    {
-      "id": "8d25",
-      "nomeProduto": "ovo",
-      "preco": "44",
-      "quantidade": "25",
-      "data": "07:36:45",
-      "categoriaDoproduto": "Grãos e cereais"
-    },
-    {
-      "id": "f7ae",
-      "nomeProduto": "carlos",
-      "preco": "44",
-      "quantidade": "25",
-      "data": "07:37:21",
-      "categoriaDoproduto": "Grãos e cereais"
-    },
-    {
-      "id": "d983",
-      "nomeProduto": "55",
-      "preco": "25",
-      "quantidade": "44",
-      "data": "07:33:28",
-      "categoriaDoproduto": "Congelados"
+      "data": "18:18:25",
+      "categoriaDoproduto": "Ovos",
+      "descricao": "este e um produto teste hahahah"
     }
   ]
 }

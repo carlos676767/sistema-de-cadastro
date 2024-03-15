@@ -1,17 +1,20 @@
 import Swal from "sweetalert2";
 import { obterValorCategoria, produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
-import Chart from 'chart.js/auto';
+
 
 
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
 const precoProduto = document.getElementById("productPrice") as HTMLInputElement;
 const quantidadeProduto = document.getElementById( "productQuantity") as HTMLInputElement;
+const descricaoProduto = document.getElementById("descricao") as HTMLTextAreaElement
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
   data: string
   categoriaDoproduto: string
+  descricao: string
+
 }
 
 
@@ -33,7 +36,8 @@ const cadastrarProdutos = () => {
       preco: precoProduto.value,
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
-      categoriaDoproduto: produtoSelecionado
+      categoriaDoproduto: produtoSelecionado,
+      descricao: descricaoProduto.value
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
@@ -109,7 +113,9 @@ const buscarProdutoPorNome = () => {
         ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace( /"/g,"" ))}
         ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace( /"/g,""))}
         ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace( /"/g,  "" ))}
-        ${tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, "")}`;
+        ${tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, "")}
+        ${tabela[4].innerHTML = JSON.stringify(element.descricao).replace(/"/g, "")}`;
+        
         produtos.push(produto);
         });
         produtosSelecionados = data[0];
