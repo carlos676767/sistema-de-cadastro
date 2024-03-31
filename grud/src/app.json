@@ -1,3 +1,12 @@
 {
-  "produtos": []
+  "produtos": [
+    {
+      "id": "cad1",
+      "nomeProduto": "salgadinho",
+      "preco": "25",
+      "quantidade": "1",
+      "data": "15:20:44",
+      "descricao": "444"
+    }
+  ]
 }

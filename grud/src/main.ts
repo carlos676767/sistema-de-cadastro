@@ -186,57 +186,102 @@ const mensagemCategoriaNaoExiste = () => {
   });
 };
 
+
+const thNomeProduto = document.getElementById("nomeProduto") as HTMLElement;
+const tdExibirPreco = document.getElementById("tdExibirPreco") as HTMLElement;
+const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto") as HTMLElement;
+const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto") as HTMLElement
+const deletarValorTabela = document.getElementById("deletarValorTabela") as HTMLElement
+
+
+
 const buscaPorCriterio = () => {
-  const thNomeProduto = document.getElementById("nomeProduto");
-  const tdExibirPreco = document.getElementById("tdExibirPreco");
-  const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto");
-  const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto");
   if (!obterValorCategoria) {
     mensagemCategoria();
   } else {
-    fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data == false) {
-          mensagemCategoriaNaoExiste();
-        } else {
-          data.forEach((element: any) => {
-            const nomeProduto = document.createElement("td");
-            nomeProduto.classList.add("tirarBorderNone");
-            nomeProduto.style.display = "block";
-            if (thNomeProduto != null) {
-              thNomeProduto.appendChild(nomeProduto);
-              nomeProduto.innerHTML = element.nomeProduto;
-            }
-            const precoDoMeuProduto = document.createElement("td");
-            precoDoMeuProduto.style.display = "block";
-            precoDoMeuProduto.classList.add("tirarBorderNone");
-            if (tdExibirPreco != null) {
-              tdExibirPreco.appendChild(precoDoMeuProduto);
-              precoDoMeuProduto.innerHTML = element.preco;
-            }
-            const quantidadeDoMeuProduto = document.createElement("td");
-            quantidadeDoMeuProduto.classList.add("tirarBorderNone");
-            quantidadeDoMeuProduto.style.display = "block";
-            if (tdQuantidadeProduto != null) {
-              tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto);
-              quantidadeDoMeuProduto.innerHTML = element.quantidade;
-            }
-            const dataDoMeuProduto = document.createElement("td");
-            dataDoMeuProduto.style.display = "block";
-            dataDoMeuProduto.classList.add("tirarBorderNone");
-            if (dataDoMeuProduto2 != null) {
-              dataDoMeuProduto2.appendChild(dataDoMeuProduto);
-              dataDoMeuProduto.innerHTML = element.data;
-            }
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    buscarProdutosPorCriteriosEspefificos();
   }
 };
+
+
+const buscarProdutosPorCriteriosEspefificos = async ()  => {
+  try {
+    const data = await fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`, {
+      method: "GET"
+    })
+    const response = await data.json()
+    if (response == false) {
+      mensagemCategoriaNaoExiste();
+    } 
+    valores(response)
+  } catch (error) {
+    console.error("nao foi possivel buscar pelo criterio.")
+  }
+}
+
+
+let pegarIdTabela: string = ""
+
+
+const valores = (data: any) => {
+  data.forEach((element: any) => {
+    const nomeProduto = document.createElement("td");
+    nomeProduto.classList.add("tirarBorderNone");
+    nomeProduto.style.display = "block";
+    if (thNomeProduto != null) {
+      thNomeProduto.appendChild(nomeProduto);
+      nomeProduto.innerHTML = element.nomeProduto;
+    }
+    const precoDoMeuProduto = document.createElement("td");
+    precoDoMeuProduto.style.display = "block";
+    precoDoMeuProduto.classList.add("tirarBorderNone");
+    if (tdExibirPreco != null) {
+      tdExibirPreco.appendChild(precoDoMeuProduto);
+      precoDoMeuProduto.innerHTML = element.preco;
+    }
+    const quantidadeDoMeuProduto = document.createElement("td");
+    quantidadeDoMeuProduto.classList.add("tirarBorderNone");
+    quantidadeDoMeuProduto.style.display = "block";
+    if (tdQuantidadeProduto != null) {
+      tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto);
+      quantidadeDoMeuProduto.innerHTML = element.quantidade;
+    }
+    const dataDoMeuProduto = document.createElement("td");
+    dataDoMeuProduto.style.display = "block";
+    dataDoMeuProduto.classList.add("tirarBorderNone");
+    if (dataDoMeuProduto2 != null) {
+      dataDoMeuProduto2.appendChild(dataDoMeuProduto);
+      dataDoMeuProduto.innerHTML = element.data;
+    }
+    const button = document.createElement("button") as HTMLButtonElement
+    button.style.display = "block";
+    if (button != null) {
+      deletarValorTabela.appendChild(button);
+      pegarIdTabela = element.id;
+      botaoQuevaiDeletar(button)
+    }
+  });
+}
+
+const botaoQuevaiDeletar = (button: HTMLButtonElement) => {
+  button.innerHTML = "deletar"
+  button.addEventListener("click", () => {
+    deletarDaTabela();
+  });
+};
+
+const deletarDaTabela = async() => {
+  try {
+    const data = await fetch(`http://localhost:3000/produtos/${pegarIdTabela}`, {
+      method: "DELETE"
+    })
+    const response = await data.json()
+    alert(`o id ${pegarIdTabela} deletado ${response}`)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 
 const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement;
 botaoPequisarCriterios.addEventListener("click", () => {
