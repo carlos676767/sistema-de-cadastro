@@ -1,22 +1,10 @@
 import Swal from "sweetalert2";
-import {
-  obterValorCategoria,
-  produtoSelecionado,
-  valoresSelecionados,
-} from "./categoriaSelects";
+import {obterValorCategoria,produtoSelecionado,valoresSelecionados,} from "./categoriaSelects";
 
-const nomeProdutoDoProduto = document.getElementById(
-  "productName"
-) as HTMLInputElement;
-const precoProduto = document.getElementById(
-  "productPrice"
-) as HTMLInputElement;
-const quantidadeProduto = document.getElementById(
-  "productQuantity"
-) as HTMLInputElement;
-const descricaoProduto = document.getElementById(
-  "descricao"
-) as HTMLTextAreaElement;
+const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
+const precoProduto = document.getElementById( "productPrice") as HTMLInputElement;
+const quantidadeProduto = document.getElementById("productQuantity") as HTMLInputElement;
+const descricaoProduto = document.getElementById("descricao") as HTMLTextAreaElement;
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
@@ -36,11 +24,7 @@ const obterDataEHoraAtual = () => {
 };
 
 const cadastrarProdutos = () => {
-  if (
-    nomeProdutoDoProduto.value === "" &&
-    precoProduto.value === "" &&
-    quantidadeProduto.value === ""
-  ) {
+  if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
     mensagemVazio();
   } else {
     const mercadorias: Mercadorias = {
@@ -107,15 +91,9 @@ const mensagemProdutoCadastrado = () => {
   });
 };
 
-const botaoPesquisar = document.getElementById(
-  "botao-pesquisar"
-) as HTMLButtonElement;
-const deltarProduto = document.getElementById(
-  "deltar-produto"
-) as HTMLButtonElement;
-const buscarProdutoInput = document.getElementById(
-  "searchInput"
-) as HTMLInputElement;
+const botaoPesquisar = document.getElementById("botao-pesquisar") as HTMLButtonElement;
+const deltarProduto = document.getElementById( "deltar-produto") as HTMLButtonElement;
+const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
 let produtosSelecionados: any;
 
 const mostrarTabela = (data: any) => {
@@ -166,22 +144,18 @@ const limparResultados = () => {
   tabela[4].innerHTML = "";
 };
 
-const deletarProduto = () => {
-  fetch(`http://localhost:3000/produtos/${produtosSelecionados.id}`, {
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (response.ok) {
-        mensagemProdutoDeletado();
-        limparResultados();
-        console.log("Item excluído com sucesso");
-      } else {
-        console.error("Erro ao excluir o item");
-      }
+const deletarProduto = async() => {
+  try {
+    const data = await fetch(`http://localhost:3000/produtos/${produtosSelecionados.id}`, {
+      method:"DELETE"
     })
-    .catch((error) => {
-      console.error("Erro na solicitação DELETE:", error);
-    });
+    const response = await data.json()
+    mensagemProdutoDeletado();
+    limparResultados();
+    console.log("Item excluído com sucesso", response);
+  } catch (error) {
+    console.error(error)
+  }
 };
 
 deltarProduto.addEventListener("click", () => {
@@ -192,9 +166,7 @@ botaoPesquisar.addEventListener("click", () => {
   buscarProdutoPorNome();
 });
 
-const botaoCadastrar = document.getElementById(
-  "botaoCadastrar"
-) as HTMLButtonElement;
+const botaoCadastrar = document.getElementById("botaoCadastrar") as HTMLButtonElement;
 botaoCadastrar.addEventListener("click", () => {
   cadastrarProdutos();
 });
@@ -222,9 +194,7 @@ const buscaPorCriterio = () => {
   if (!obterValorCategoria) {
     mensagemCategoria();
   } else {
-    fetch(
-      `http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`
-    )
+    fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
       .then((response) => response.json())
       .then((data) => {
         if (data == false) {
@@ -268,9 +238,7 @@ const buscaPorCriterio = () => {
   }
 };
 
-const botaoPequisarCriterios = document.getElementById(
-  "botao-pequisar-criterios"
-) as HTMLButtonElement;
+const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement;
 botaoPequisarCriterios.addEventListener("click", () => {
   buscaPorCriterio();
 });
