@@ -1,31 +1,39 @@
 import Swal from "sweetalert2";
-import { obterValorCategoria, produtoSelecionado, valoresSelecionados,  } from "./categoriaSelects";
+import {
+  obterValorCategoria,
+  produtoSelecionado,
+  valoresSelecionados,
+} from "./categoriaSelects";
 
-
-
-const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
-const precoProduto = document.getElementById("productPrice") as HTMLInputElement;
-const quantidadeProduto = document.getElementById( "productQuantity") as HTMLInputElement;
-const descricaoProduto = document.getElementById("descricao") as HTMLTextAreaElement
+const nomeProdutoDoProduto = document.getElementById(
+  "productName"
+) as HTMLInputElement;
+const precoProduto = document.getElementById(
+  "productPrice"
+) as HTMLInputElement;
+const quantidadeProduto = document.getElementById(
+  "productQuantity"
+) as HTMLInputElement;
+const descricaoProduto = document.getElementById(
+  "descricao"
+) as HTMLTextAreaElement;
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
-  data: string
-  categoriaDoproduto: string
-  descricao: string
-
+  data: string;
+  categoriaDoproduto: string;
+  descricao: string;
 }
-
 
 const obterDataEHoraAtual = () => {
-  const agora = new Date()
-  const dataAtual = agora.getHours().toString().padStart(2, "0")
+  const agora = new Date();
+  const dataAtual = agora.getHours().toString().padStart(2, "0");
   const minutos = agora.getMinutes().toString().padStart(2, "0");
-  const segundos = agora.getSeconds().toString().padStart(2, "0")
-  const horario = `${dataAtual}:${minutos}:${segundos}`
-  return horario
-}
+  const segundos = agora.getSeconds().toString().padStart(2, "0");
+  const horario = `${dataAtual}:${minutos}:${segundos}`;
+  return horario;
+};
 
 const cadastrarProdutos = () => {
   if (
@@ -99,39 +107,53 @@ const mensagemProdutoCadastrado = () => {
   });
 };
 
-const botaoPesquisar = document.getElementById( "botao-pesquisar") as HTMLButtonElement;
-const deltarProduto = document.getElementById( "deltar-produto") as HTMLButtonElement;
-const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
+const botaoPesquisar = document.getElementById(
+  "botao-pesquisar"
+) as HTMLButtonElement;
+const deltarProduto = document.getElementById(
+  "deltar-produto"
+) as HTMLButtonElement;
+const buscarProdutoInput = document.getElementById(
+  "searchInput"
+) as HTMLInputElement;
 let produtosSelecionados: any;
 
-
 const mostrarTabela = (data: any) => {
-  const exibir = document.getElementById("exibir") as HTMLTextAreaElement
+  const exibir = document.getElementById("exibir") as HTMLTextAreaElement;
   let produtos: any = [];
   data.forEach((element: any) => {
     let produto = `
-        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(/"/g, ""))}
-        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g, ""))}
-        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g, ""))}
-        ${tabela[3].innerHTML = JSON.stringify(element.data).replace(/"/g, "")}
-        ${exibir.innerHTML = JSON.stringify(element.descricao).replace(/"/g, "")}`;
-    produtos.push(produto);
+        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(  /"/g,   "" ))}
+        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g,  ""))}
+        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g,"" ))}
+        ${(tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, ""))}
+        ${(exibir.innerHTML = JSON.stringify(element.descricao).replace( /"/g,""))}`;
+         produtos.push(produto);
   });
   produtosSelecionados = data[0];
-}
+};
+
+const valorNaoEncontrado = (data: any) => {
+  if (data == false) {
+    mensagemValorNaoEncontrado();
+  }
+};
 
 const tabela = document.querySelectorAll("td");
-const buscarProdutoPorNome  =  async() => {
+const buscarProdutoPorNome = async () => {
   if (buscarProdutoInput.value === "") {
     mensagemVazio();
   } else {
     try {
-      const response = await fetch(`http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`)
-      const data = await response.json()
-      mostrarTabela(data)
+      const response = await fetch(
+        `http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`,{
+          method:"GET"
+        });
+      const data = await response.json();
+      valorNaoEncontrado(data)
+      mostrarTabela(data);
     } catch (error) {
-      console.error(error)
-      mensagemValorNaoEncontrado();
+      console.error(error);
     }
   }
 };
@@ -143,7 +165,6 @@ const limparResultados = () => {
   tabela[3].innerHTML = "";
   tabela[4].innerHTML = "";
 };
-
 
 const deletarProduto = () => {
   fetch(`http://localhost:3000/produtos/${produtosSelecionados.id}`, {
@@ -163,18 +184,17 @@ const deletarProduto = () => {
     });
 };
 
-
 deltarProduto.addEventListener("click", () => {
   deletarProduto();
 });
-
 
 botaoPesquisar.addEventListener("click", () => {
   buscarProdutoPorNome();
 });
 
-
-const botaoCadastrar = document.getElementById("botaoCadastrar") as HTMLButtonElement;
+const botaoCadastrar = document.getElementById(
+  "botaoCadastrar"
+) as HTMLButtonElement;
 botaoCadastrar.addEventListener("click", () => {
   cadastrarProdutos();
 });
@@ -186,74 +206,71 @@ const mensagemCategoria = () => {
   });
 };
 
+const mensagemCategoriaNaoExiste = () => {
+  Swal.fire({
+    title: "Categoria Inválida",
+    text: "A categoria selecionada não possui produtos disponíveis.",
+    icon: "error",
+  });
+};
 
-  const mensagemCategoriaNaoExiste = () => {
-    Swal.fire({
-      title: "Categoria Inválida",
-      text: "A categoria selecionada não possui produtos disponíveis.",
-      icon: "error"
-    });
-  }
-
-
-  const buscaPorCriterio = () => {
-    const thNomeProduto = document.getElementById("nomeProduto") 
-    const tdExibirPreco = document.getElementById("tdExibirPreco")
-    const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto")
-    const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto")
-    if (!obterValorCategoria) {
-      mensagemCategoria();
-    }else{
-      fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`)
-      .then(response => response.json())
-      .then(data => {
-        if(data == false) {
+const buscaPorCriterio = () => {
+  const thNomeProduto = document.getElementById("nomeProduto");
+  const tdExibirPreco = document.getElementById("tdExibirPreco");
+  const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto");
+  const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto");
+  if (!obterValorCategoria) {
+    mensagemCategoria();
+  } else {
+    fetch(
+      `http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data == false) {
           mensagemCategoriaNaoExiste();
-        }else{
+        } else {
           data.forEach((element: any) => {
-            const nomeProduto = document.createElement("td")
-            nomeProduto.classList.add("tirarBorderNone")
-            nomeProduto.style.display = "block"
+            const nomeProduto = document.createElement("td");
+            nomeProduto.classList.add("tirarBorderNone");
+            nomeProduto.style.display = "block";
             if (thNomeProduto != null) {
-              thNomeProduto.appendChild(nomeProduto)
-              nomeProduto.innerHTML = element.nomeProduto
+              thNomeProduto.appendChild(nomeProduto);
+              nomeProduto.innerHTML = element.nomeProduto;
             }
-            const precoDoMeuProduto = document.createElement("td")
-            precoDoMeuProduto.style.display = "block"
-            precoDoMeuProduto.classList.add("tirarBorderNone")
+            const precoDoMeuProduto = document.createElement("td");
+            precoDoMeuProduto.style.display = "block";
+            precoDoMeuProduto.classList.add("tirarBorderNone");
             if (tdExibirPreco != null) {
-              tdExibirPreco.appendChild(precoDoMeuProduto)
-              precoDoMeuProduto.innerHTML = element.preco
+              tdExibirPreco.appendChild(precoDoMeuProduto);
+              precoDoMeuProduto.innerHTML = element.preco;
             }
-            const quantidadeDoMeuProduto = document.createElement("td")
-            quantidadeDoMeuProduto.classList.add("tirarBorderNone")
-            quantidadeDoMeuProduto.style.display = "block"
+            const quantidadeDoMeuProduto = document.createElement("td");
+            quantidadeDoMeuProduto.classList.add("tirarBorderNone");
+            quantidadeDoMeuProduto.style.display = "block";
             if (tdQuantidadeProduto != null) {
-              tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto)
-              quantidadeDoMeuProduto.innerHTML = element.quantidade
+              tdQuantidadeProduto.appendChild(quantidadeDoMeuProduto);
+              quantidadeDoMeuProduto.innerHTML = element.quantidade;
             }
-            const dataDoMeuProduto = document.createElement("td")
-            dataDoMeuProduto.style.display = "block"
-            dataDoMeuProduto.classList.add("tirarBorderNone")
+            const dataDoMeuProduto = document.createElement("td");
+            dataDoMeuProduto.style.display = "block";
+            dataDoMeuProduto.classList.add("tirarBorderNone");
             if (dataDoMeuProduto2 != null) {
-              dataDoMeuProduto2.appendChild(dataDoMeuProduto)
-              dataDoMeuProduto.innerHTML = element.data
+              dataDoMeuProduto2.appendChild(dataDoMeuProduto);
+              dataDoMeuProduto.innerHTML = element.data;
             }
-            
-         });
+          });
         }
       })
-      .catch(error => {
-        console.error(error)
-      })
-    }
-   
+      .catch((error) => {
+        console.error(error);
+      });
   }
+};
 
-
-  
-  
-  const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement
-  botaoPequisarCriterios.addEventListener("click", () => {
-    buscaPorCriterio()
-  })
+const botaoPequisarCriterios = document.getElementById(
+  "botao-pequisar-criterios"
+) as HTMLButtonElement;
+botaoPequisarCriterios.addEventListener("click", () => {
+  buscaPorCriterio();
+});
