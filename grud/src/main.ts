@@ -28,7 +28,11 @@ const obterDataEHoraAtual = () => {
 }
 
 const cadastrarProdutos = () => {
-  if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
+  if (
+    nomeProdutoDoProduto.value === "" &&
+    precoProduto.value === "" &&
+    quantidadeProduto.value === ""
+  ) {
     mensagemVazio();
   } else {
     const mercadorias: Mercadorias = {
@@ -37,28 +41,29 @@ const cadastrarProdutos = () => {
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
       categoriaDoproduto: produtoSelecionado,
-      descricao: descricaoProduto.value
+      descricao: descricaoProduto.value,
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
 };
 
+valoresSelecionados();
 
-valoresSelecionados()
-
-const requsicaoPostAdicionarProdutos = (objeto: {}) => {
-  fetch("http://localhost:3000/produtos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(objeto),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      mensagemProdutoCadastrado();
+const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
+  try {
+    const data = await fetch("http://localhost:3000/produtos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objeto),
     });
+    const response = await data.json();
+    console.log(response);
+    mensagemProdutoCadastrado();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const mensagemVazio = () => {
@@ -99,32 +104,35 @@ const deltarProduto = document.getElementById( "deltar-produto") as HTMLButtonEl
 const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
 let produtosSelecionados: any;
 
+
+const mostrarTabela = (data: any) => {
+  const exibir = document.getElementById("exibir") as HTMLTextAreaElement
+  let produtos: any = [];
+  data.forEach((element: any) => {
+    let produto = `
+        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(/"/g, ""))}
+        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g, ""))}
+        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g, ""))}
+        ${tabela[3].innerHTML = JSON.stringify(element.data).replace(/"/g, "")}
+        ${exibir.innerHTML = JSON.stringify(element.descricao).replace(/"/g, "")}`;
+    produtos.push(produto);
+  });
+  produtosSelecionados = data[0];
+}
+
 const tabela = document.querySelectorAll("td");
-const buscarProdutoPorNome = () => {
+const buscarProdutoPorNome  =  async() => {
   if (buscarProdutoInput.value === "") {
     mensagemVazio();
   } else {
-    fetch(`http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`)
-      .then((response) => response.json())
-      .then((data: Array<any>) => {
-        let produtos: any = [];
-        data.forEach((element) => {
-        let produto = `
-        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace( /"/g,"" ))}
-        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace( /"/g,""))}
-        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace( /"/g,  "" ))}
-        ${tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, "")}
-        ${tabela[4].innerHTML = JSON.stringify(element.descricao).replace(/"/g, "")}`;
-        
-        produtos.push(produto);
-        });
-        produtosSelecionados = data[0];
-      
-      })
-      .catch((error) => {
-        console.log(error);
-        mensagemValorNaoEncontrado();
-      });
+    try {
+      const response = await fetch(`http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`)
+      const data = await response.json()
+      mostrarTabela(data)
+    } catch (error) {
+      console.error(error)
+      mensagemValorNaoEncontrado();
+    }
   }
 };
 
