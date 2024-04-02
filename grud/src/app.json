@@ -1,126 +1,45 @@
 {
   "produtos": [
     {
-      "id": "6b2a",
-      "nomeProduto": "11",
-      "preco": "11",
-      "quantidade": "4",
-      "data": "17:32:03",
-      "descricao": "2"
-    },
-    {
-      "id": "9d5c",
+      "id": "e6c9",
       "nomeProduto": "1",
       "preco": "1",
       "quantidade": "1",
-      "data": "17:33:20",
-      "descricao": "11"
+      "data": "18:19:54",
+      "valorDoProduto": "1"
     },
     {
-      "id": "7f99",
-      "nomeProduto": "22",
-      "preco": "44",
-      "quantidade": "25",
-      "data": "17:34:20",
-      "descricao": "44"
-    },
-    {
-      "id": "b67f",
-      "nomeProduto": "11",
-      "preco": "11",
-      "quantidade": "11",
-      "data": "17:35:05",
-      "descricao": ""
-    },
-    {
-      "id": "2d4a",
+      "id": "b826",
       "nomeProduto": "1",
       "preco": "1",
       "quantidade": "1",
-      "data": "17:36:21",
-      "descricao": "1"
+      "data": "18:19:57",
+      "valorDoProduto": "1"
     },
     {
-      "id": "8611",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "17:36:48",
-      "descricao": ""
-    },
-    {
-      "id": "7202",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "17:36:50",
-      "descricao": ""
-    },
-    {
-      "id": "5d55",
-      "nomeProduto": "11",
-      "preco": "11",
-      "quantidade": "11",
-      "data": "17:37:09",
-      "descricao": ""
-    },
-    {
-      "id": "02fd",
-      "nomeProduto": "11",
-      "preco": "11",
-      "quantidade": "1",
-      "data": "17:39:05",
-      "descricao": ""
-    },
-    {
-      "id": "eb66",
-      "nomeProduto": "22",
-      "preco": "22",
-      "quantidade": "11",
-      "data": "17:39:33",
-      "descricao": "11"
-    },
-    {
-      "id": "95f2",
-      "nomeProduto": "11",
-      "preco": "22",
-      "quantidade": "11",
-      "data": "17:45:03",
-      "descricao": "1"
-    },
-    {
-      "id": "68c5",
-      "nomeProduto": "44",
+      "id": "888f",
+      "nomeProduto": "25",
       "preco": "4",
-      "quantidade": "4",
-      "data": "17:46:59",
-      "descricao": ""
+      "quantidade": "5",
+      "data": "18:21:08",
+      "categoriaDoproduto": "Conservas e enlatados",
+      "valorDoProduto": "3"
     },
     {
-      "id": "72a5",
-      "nomeProduto": "222",
-      "preco": "444",
-      "quantidade": "222",
-      "data": "17:47:25",
-      "descricao": "11"
+      "id": "4ddf",
+      "nomeProduto": "1",
+      "preco": "1",
+      "quantidade": "1",
+      "data": "18:25:18",
+      "valorDoProduto": "1"
     },
     {
-      "id": "42dd",
-      "nomeProduto": "frango",
-      "preco": "",
-      "quantidade": "",
-      "data": "17:51:08",
-      "categoriaDoproduto": "Congelados",
-      "descricao": ""
-    },
-    {
-      "id": "0c13",
-      "nomeProduto": "frango",
-      "preco": "",
-      "quantidade": "",
-      "data": "17:51:09",
-      "categoriaDoproduto": "Congelados",
-      "descricao": ""
+      "id": "f6ff",
+      "nomeProduto": "1",
+      "preco": "1",
+      "quantidade": "1",
+      "data": "18:25:34",
+      "valorDoProduto": "1"
     }
   ]
 }

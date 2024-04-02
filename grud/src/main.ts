@@ -4,14 +4,14 @@ import {obterValorCategoria,produtoSelecionado,valoresSelecionados,} from "./cat
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
 const precoProduto = document.getElementById( "productPrice") as HTMLInputElement;
 const quantidadeProduto = document.getElementById("productQuantity") as HTMLInputElement;
-const descricaoProduto = document.getElementById("descricao") as HTMLTextAreaElement;
+const valorDoProduto = document.getElementById("valorDoProduto") as HTMLInputElement
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
   data: string;
   categoriaDoproduto: string;
-  descricao: string;
+  valorDoProduto: string;
 }
 
 const obterDataEHoraAtual = () => {
@@ -33,7 +33,7 @@ const cadastrarProdutos = () => {
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
       categoriaDoproduto: produtoSelecionado,
-      descricao: descricaoProduto.value,
+      valorDoProduto: valorDoProduto.value,
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
@@ -56,28 +56,35 @@ const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
     });
     const response = await data.json();
     mensagemProdutoCadastrado();
-    mostrarProdutosTotais()
+    mostrarInformacoesProdutos()
   } catch (error) {
     console.error(error);
   }
 };
 
-const mostrarProdutosTotais = async() => {
+const mostrarInformacoesProdutos = async() => {
   try {
     const data = await fetch("http://localhost:3000/produtos", {
       method: 'GET'
     })
     const response = await data.json()
-    console.log(response);
+    somarValorProdutos(response)
     quantidadeProdutos.innerHTML = `${response.length}`
   } catch (error) {
     console.error(error)
   }
-  
 }
-mostrarProdutosTotais()
 
+const somarValorProdutos = (data: any) => {
+  const exibirPrecos = document.getElementById("exibirPrecos") as HTMLParagraphElement
+  let somarTodosOsProdutos: number = 0
+  data.forEach((element: any) => {
+    somarTodosOsProdutos+= Number(element.valorDoProduto)
+  });
+  exibirPrecos.innerHTML = `$${somarTodosOsProdutos.toFixed(2)}`
+}
 
+mostrarInformacoesProdutos()
 
 const mensagemVazio = () => {
   Swal.fire({
@@ -173,7 +180,7 @@ const deletarProduto = async() => {
     const response = await data.json()
     mensagemProdutoDeletado();
     limparResultados();
-    mostrarProdutosTotais();
+    mostrarInformacoesProdutos();
     console.log("Item excluído com sucesso", response);
   } catch (error) {
     console.error(error)
@@ -244,7 +251,6 @@ const buscarProdutosPorCriteriosEspefificos = async ()  => {
 
 let pegarIdTabela: string = ""
 
-
 const valores = (data: any) => {
   data.forEach((element: any) => {
     const nomeProduto = document.createElement("td");
@@ -299,7 +305,7 @@ const deletarDaTabela = async() => {
     })
     const response = await data.json()
     alert(`o id ${pegarIdTabela} deletado ${response}`)
-    mostrarProdutosTotais();
+    mostrarInformacoesProdutos();
   } catch (error) {
     console.error(error)
   }

@@ -15,8 +15,8 @@
     <header>
        <div class="botoes">
         <ul class="bootoesEmCima">
-          <li><button type="button" class="btn btn-primary">Quantidade de produtos<p class="quantidadeProdutos"></p></button></li>
-          <li><button type="button" class="btn btn-danger">Danger</button></li>
+          <li><button type="button" class="btn btn-primary">Quantidade de produtos <br> <p class="quantidadeProdutos"></p></button></li>
+          <li><button type="button" class="btn btn-danger">Valor do estoque <p id="exibirPrecos"></p></button></li>
           <li></li>
           <li></li>
         </ul>
@@ -38,9 +38,10 @@
             <input type="number" id="productQuantity" name="productQuantity" min="0" step="1" >
         </div>
         <div class="form-group">
-          <label for="productQuantity">descrição do produto:</label>
-          <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+          <label for="productQuantity">Valor do produto:</label>
+          <input type="number" id="valorDoProduto" name="productQuantity" min="0" step="1" >
       </div>
+       
         <div class="form-group">
             <label for="productImage">Categoria do produto:</label>
             <select id="categoriaAlimentos">
