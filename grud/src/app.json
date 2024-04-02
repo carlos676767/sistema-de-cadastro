@@ -1,45 +1,13 @@
 {
   "produtos": [
     {
-      "id": "e6c9",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "18:19:54",
-      "valorDoProduto": "1"
-    },
-    {
-      "id": "b826",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "18:19:57",
-      "valorDoProduto": "1"
-    },
-    {
-      "id": "888f",
-      "nomeProduto": "25",
-      "preco": "4",
-      "quantidade": "5",
-      "data": "18:21:08",
-      "categoriaDoproduto": "Conservas e enlatados",
-      "valorDoProduto": "3"
-    },
-    {
-      "id": "4ddf",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "18:25:18",
-      "valorDoProduto": "1"
-    },
-    {
-      "id": "f6ff",
-      "nomeProduto": "1",
-      "preco": "1",
-      "quantidade": "1",
-      "data": "18:25:34",
-      "valorDoProduto": "1"
+      "id": "f83b",
+      "nomeProduto": "55",
+      "preco": "44",
+      "quantidade": "4",
+      "data": "18:41:03",
+      "categoriaDoproduto": "Congelados",
+      "valorDoProduto": "44"
     }
   ]
 }

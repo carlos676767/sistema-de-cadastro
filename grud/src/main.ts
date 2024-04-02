@@ -132,8 +132,7 @@ const mostrarTabela = (data: any) => {
         ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(  /"/g,   "" ))}
         ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g,  ""))}
         ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g,"" ))}
-        ${(tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, ""))}
-        ${(exibir.innerHTML = JSON.stringify(element.descricao).replace( /"/g,""))}`;
+        ${(tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, ""))}`;
          produtos.push(produto);
   });
   produtosSelecionados = data[0];
@@ -181,6 +180,8 @@ const deletarProduto = async() => {
     mensagemProdutoDeletado();
     limparResultados();
     mostrarInformacoesProdutos();
+    console.log(produtosSelecionados.id);
+    
     console.log("Item excluído com sucesso", response);
   } catch (error) {
     console.error(error)
