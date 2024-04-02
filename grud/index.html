@@ -15,12 +15,40 @@
     <header>
        <div class="botoes">
         <ul class="bootoesEmCima">
-          <li><button type="button" class="btn btn-primary">Quantidade de produtos <br> <p class="quantidadeProdutos"></p></button></li>
+          <li><button type="button" class="btn btn-primary">Quantidade de produtos <p class="quantidadeProdutos"></p></button></li>
           <li><button type="button" class="btn btn-danger">Valor do estoque <p id="exibirPrecos"></p></button></li>
-          <li></li>
-          <li></li>
+          <li><button type="button" class="btn btn-secondary">Produtos deletados <p class="mostrarTotalDeletados">25</p></button></li>
+          <li><button type="button" class="btn btn-success">Total de produtos por categoria <select name="" id="optionprodutos">
+            <option value="Frutas frescas">Frutas frescas</option>
+            <option value="Vegetais frescos">Vegetais frescos</option>
+            <option value="Carnes e aves">Carnes e aves</option>
+            <option value="Peixes e frutos do mar">Peixes e frutos do mar</option>
+            <option value="Produtos lácteos">Produtos lácteos</option>
+            <option value="Ovos">Ovos</option>
+            <option value="Grãos e cereais">Grãos e cereais</option>
+            <option value="Pães e produtos de panificação">Pães e produtos de panificação</option>
+            <option value="Massas e arroz">Massas e arroz</option>
+            <option value="Oleaginosas e sementes">Oleaginosas e sementes</option>
+            <option value="Óleos e gorduras">Óleos e gorduras</option>
+            <option value="Açúcares e adoçantes">Açúcares e adoçantes</option>
+            <option value="Bebidas não alcoólicas">Bebidas não alcoólicas</option>
+            <option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
+            <option value="Produtos processados">Produtos processados</option>
+            <option value="Snacks e petiscos">Snacks e petiscos</option>
+            <option value="Condimentos e temperos">Condimentos e temperos</option>
+            <option value="Conservas e enlatados">Conservas e enlatados</option>
+            <option value="Congelados">Congelados</option>
+            <option value="Produtos orgânicos">Produtos orgânicos</option>
+            <option value="Produtos sem glúten">Produtos sem glúten</option>
+            <option value="Produtos sem lactose">Produtos sem lactose</option>
+            <option value="Produtos vegetarianos / veganos">Produtos vegetarianos / veganos</option>
+            <option value="Suplementos alimentares">Suplementos alimentares</option>
+          </select> <p class="valoresVendidos"></p>10</button></li>
+          <li><div class="dark-mode-toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle" class="toggle-label"></label>
+        </div></li>
         </ul>
-       
        </div>
     </header>
     <main>
@@ -37,11 +65,8 @@
             <label for="productQuantity">Quantidade:</label>
             <input type="number" id="productQuantity" name="productQuantity" min="0" step="1" >
         </div>
-        <div class="form-group">
-          <label for="productQuantity">Valor do produto:</label>
-          <input type="number" id="valorDoProduto" name="productQuantity" min="0" step="1" >
-      </div>
-       
+        
+
         <div class="form-group">
             <label for="productImage">Categoria do produto:</label>
             <select id="categoriaAlimentos">
@@ -72,21 +97,20 @@
                 <option value="Suplementos alimentares">Suplementos alimentares</option>
               </select>
         </div>
-        <button type="submit" id="botaoCadastrar">Cadastrar Produto</button>
+        <button type="submit" id="botaoCadastrar"><i class="fa-solid fa-database"></i></button>
         </section>
 
 
         <section class="container">     
-        <section class="container">
+        <section class="container" class="mostrar">
             <h2>Produtos Cadastrados</h2>
                 <table>
                     <thead>
                       <tr>
-                        <th>Nome do Produto</th>
+                        <th>Nome produto</th>
                         <th>Preço</th>
                         <th>Quantidade</th>
-                        <th>Hora de cadastramento</th>
-                        <th>descrição do produto</th>
+                        <th>horario do cadastro</th>
                         <th>Deletar produto</th>
                       </tr>
                     </thead>
@@ -96,8 +120,7 @@
                         <td data-label="Preço"></td>
                         <td data-label="Quantidade"></td>
                         <td data-label="data"></td>
-                        <td data-label="descricao"><textarea name="exibir" id="exibir" cols="20" rows="10"></textarea></td>
-                        <td data-label="Deletar produto"><button class="delete-button" id="deltar-produto">Deletar</button></td>
+                        <td data-label="Deletar produto"><button class="delete-button" id="deltar-produto"><i class="fa-solid fa-delete-left"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -105,7 +128,7 @@
         
             <div class="divDados">
                 <input type="text" id="searchInput" placeholder="Pesquisar por nome do produto">
-                <button id="botao-pesquisar">Pesquisar</button>
+                <button id="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
           
             <div class="divTabela">
@@ -144,7 +167,6 @@
                         <th>Preço</th>
                         <th>Quantidade</th>
                         <th>Hora de cadastramento</th>
-              
                       </tr>
                     </thead>
                     <tbody>
@@ -156,7 +178,7 @@
                       </tr>
                     </tbody>
                   </table>
-                <button id="botao-pequisar-criterios">Pesquisar</button>
+                <button id="botao-pequisar-criterios"><i class="fa-solid fa-magnifying-glass"></i> </button>
             </div>
         </section>
     </main>

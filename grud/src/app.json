@@ -1,13 +1,20 @@
 {
   "produtos": [
     {
-      "id": "f83b",
-      "nomeProduto": "55",
-      "preco": "44",
+      "id": "f3ce",
+      "nomeProduto": "44",
+      "preco": "2",
+      "quantidade": "99",
+      "data": "19:20:46",
+      "categoriaDoproduto": "Congelados"
+    },
+    {
+      "id": "0ce3",
+      "nomeProduto": "frango",
+      "preco": "25",
       "quantidade": "4",
-      "data": "18:41:03",
-      "categoriaDoproduto": "Congelados",
-      "valorDoProduto": "44"
+      "data": "20:11:49",
+      "categoriaDoproduto": "Congelados"
     }
   ]
 }

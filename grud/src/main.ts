@@ -4,14 +4,12 @@ import {obterValorCategoria,produtoSelecionado,valoresSelecionados,} from "./cat
 const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
 const precoProduto = document.getElementById( "productPrice") as HTMLInputElement;
 const quantidadeProduto = document.getElementById("productQuantity") as HTMLInputElement;
-const valorDoProduto = document.getElementById("valorDoProduto") as HTMLInputElement
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
   quantidade: string;
   data: string;
   categoriaDoproduto: string;
-  valorDoProduto: string;
 }
 
 const obterDataEHoraAtual = () => {
@@ -33,15 +31,12 @@ const cadastrarProdutos = () => {
       quantidade: quantidadeProduto.value,
       data: obterDataEHoraAtual(),
       categoriaDoproduto: produtoSelecionado,
-      valorDoProduto: valorDoProduto.value,
     };
     requsicaoPostAdicionarProdutos(mercadorias);
   }
 };
 
 valoresSelecionados();
-
-
 
 
 const quantidadeProdutos = document.querySelector(".quantidadeProdutos") as HTMLParagraphElement
@@ -75,11 +70,11 @@ const mostrarInformacoesProdutos = async() => {
   }
 }
 
-const somarValorProdutos = (data: any) => {
+const somarValorProdutos = (data?: any) => {
   const exibirPrecos = document.getElementById("exibirPrecos") as HTMLParagraphElement
   let somarTodosOsProdutos: number = 0
   data.forEach((element: any) => {
-    somarTodosOsProdutos+= Number(element.valorDoProduto)
+    somarTodosOsProdutos+= Number(element.preco)
   });
   exibirPrecos.innerHTML = `$${somarTodosOsProdutos.toFixed(2)}`
 }
@@ -125,14 +120,13 @@ const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputEl
 let produtosSelecionados: any;
 
 const mostrarTabela = (data: any) => {
-  const exibir = document.getElementById("exibir") as HTMLTextAreaElement;
   let produtos: any = [];
   data.forEach((element: any) => {
     let produto = `
-        ${(tabela[0].innerHTML = JSON.stringify(element.nomeProduto).replace(  /"/g,   "" ))}
-        ${(tabela[1].innerHTML = JSON.stringify(element.preco).replace(/"/g,  ""))}
-        ${(tabela[2].innerHTML = JSON.stringify(element.quantidade).replace(/"/g,"" ))}
-        ${(tabela[3].innerHTML = JSON.stringify(element.data).replace( /"/g, ""))}`;
+        ${tabela[0].innerHTML = (element.nomeProduto)}
+        ${tabela[1].innerHTML = (Number(element.preco).toFixed(1))}
+        ${tabela[2].innerHTML = (element.quantidade)}
+        ${tabela[3].innerHTML = (element.data)}`;
          produtos.push(produto);
   });
   produtosSelecionados = data[0];
@@ -180,6 +174,7 @@ const deletarProduto = async() => {
     mensagemProdutoDeletado();
     limparResultados();
     mostrarInformacoesProdutos();
+    somarValorProdutos()
     console.log(produtosSelecionados.id);
     
     console.log("Item excluído com sucesso", response);
@@ -305,8 +300,8 @@ const deletarDaTabela = async() => {
       method: "DELETE"
     })
     const response = await data.json()
-    alert(`o id ${pegarIdTabela} deletado ${response}`)
     mostrarInformacoesProdutos();
+    somarValorProdutos()
   } catch (error) {
     console.error(error)
   }
