@@ -41,6 +41,10 @@ const cadastrarProdutos = () => {
 
 valoresSelecionados();
 
+
+
+
+const quantidadeProdutos = document.querySelector(".quantidadeProdutos") as HTMLParagraphElement
 const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
   try {
     const data = await fetch("http://localhost:3000/produtos", {
@@ -51,12 +55,29 @@ const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
       body: JSON.stringify(objeto),
     });
     const response = await data.json();
-    console.log(response);
     mensagemProdutoCadastrado();
+    mostrarProdutosTotais()
   } catch (error) {
     console.error(error);
   }
 };
+
+const mostrarProdutosTotais = async() => {
+  try {
+    const data = await fetch("http://localhost:3000/produtos", {
+      method: 'GET'
+    })
+    const response = await data.json()
+    console.log(response);
+    quantidadeProdutos.innerHTML = `${response.length}`
+  } catch (error) {
+    console.error(error)
+  }
+  
+}
+mostrarProdutosTotais()
+
+
 
 const mensagemVazio = () => {
   Swal.fire({
@@ -152,6 +173,7 @@ const deletarProduto = async() => {
     const response = await data.json()
     mensagemProdutoDeletado();
     limparResultados();
+    mostrarProdutosTotais();
     console.log("Item excluído com sucesso", response);
   } catch (error) {
     console.error(error)
@@ -277,6 +299,7 @@ const deletarDaTabela = async() => {
     })
     const response = await data.json()
     alert(`o id ${pegarIdTabela} deletado ${response}`)
+    mostrarProdutosTotais();
   } catch (error) {
     console.error(error)
   }
