@@ -1,9 +1,21 @@
 import Swal from "sweetalert2";
-import {obterValorCategoria,produtoSelecionado,valoresSelecionados,} from "./categoriaSelects";
+import {
+  obterValorCategoria,
+  produtoSelecionado,
+  valoresSelecionados,
+} from "./categoriaSelects";
 
-const nomeProdutoDoProduto = document.getElementById( "productName") as HTMLInputElement;
-const precoProduto = document.getElementById( "productPrice") as HTMLInputElement;
-const quantidadeProduto = document.getElementById("productQuantity") as HTMLInputElement;
+const nomeProdutoDoProduto = document.getElementById(
+  "productName"
+) as HTMLInputElement;
+const precoProduto = document.getElementById(
+  "productPrice"
+) as HTMLInputElement;
+const quantidadeProduto = document.getElementById(
+  "productQuantity"
+) as HTMLInputElement;
+const optionprodutos = document.getElementById("optionprodutos");
+
 interface Mercadorias {
   nomeProduto: string;
   preco: string;
@@ -22,7 +34,11 @@ const obterDataEHoraAtual = () => {
 };
 
 const cadastrarProdutos = () => {
-  if (nomeProdutoDoProduto.value === "" && precoProduto.value === "" && quantidadeProduto.value === "") {
+  if (
+    nomeProdutoDoProduto.value === "" &&
+    precoProduto.value === "" &&
+    quantidadeProduto.value === ""
+  ) {
     mensagemVazio();
   } else {
     const mercadorias: Mercadorias = {
@@ -38,8 +54,9 @@ const cadastrarProdutos = () => {
 
 valoresSelecionados();
 
-
-const quantidadeProdutos = document.querySelector(".quantidadeProdutos") as HTMLParagraphElement
+const quantidadeProdutos = document.querySelector(
+  ".quantidadeProdutos"
+) as HTMLParagraphElement;
 const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
   try {
     const data = await fetch("http://localhost:3000/produtos", {
@@ -51,35 +68,35 @@ const requsicaoPostAdicionarProdutos = async (objeto: {}) => {
     });
     const response = await data.json();
     mensagemProdutoCadastrado();
-    mostrarInformacoesProdutos()
+    mostrarInformacoesProdutos();
   } catch (error) {
     console.error(error);
   }
 };
 
-const mostrarInformacoesProdutos = async() => {
+const mostrarInformacoesProdutos = async () => {
   try {
     const data = await fetch("http://localhost:3000/produtos", {
-      method: 'GET'
-    })
-    const response = await data.json()
-    somarValorProdutos(response)
-    quantidadeProdutos.innerHTML = `${response.length}`
+      method: "GET",
+    });
+    const response = await data.json();
+    somarValorProdutos(response);
+    quantidadeProdutos.innerHTML = `${response.length}`;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 const somarValorProdutos = (data?: any) => {
-  const exibirPrecos = document.getElementById("exibirPrecos") as HTMLParagraphElement
-  let somarTodosOsProdutos: number = 0
+  const exibirPrecos = document.getElementById("exibirPrecos") as HTMLParagraphElement;
+  let somarTodosOsProdutos: number = 0;
   data.forEach((element: any) => {
-    somarTodosOsProdutos+= Number(element.preco)
+    console.log((somarTodosOsProdutos += Number(element.preco)));
   });
-  exibirPrecos.innerHTML = `$${somarTodosOsProdutos.toFixed(2)}`
-}
+  exibirPrecos.innerHTML = `$${somarTodosOsProdutos.toFixed(2)}`;
+};
 
-mostrarInformacoesProdutos()
+mostrarInformacoesProdutos();
 
 const mensagemVazio = () => {
   Swal.fire({
@@ -115,7 +132,7 @@ const mensagemProdutoCadastrado = () => {
 };
 
 const botaoPesquisar = document.getElementById("botao-pesquisar") as HTMLButtonElement;
-const deltarProduto = document.getElementById( "deltar-produto") as HTMLButtonElement;
+const deltarProduto = document.getElementById("deltar-produto") as HTMLButtonElement;
 const buscarProdutoInput = document.getElementById("searchInput") as HTMLInputElement;
 let produtosSelecionados: any;
 
@@ -123,11 +140,11 @@ const mostrarTabela = (data: any) => {
   let produtos: any = [];
   data.forEach((element: any) => {
     let produto = `
-        ${tabela[0].innerHTML = (element.nomeProduto)}
-        ${tabela[1].innerHTML = (Number(element.preco).toFixed(1))}
-        ${tabela[2].innerHTML = (element.quantidade)}
-        ${tabela[3].innerHTML = (element.data)}`;
-         produtos.push(produto);
+        ${(tabela[0].innerHTML = element.nomeProduto)}
+        ${(tabela[1].innerHTML = Number(element.preco).toFixed(1))}
+        ${(tabela[2].innerHTML = element.quantidade)}
+        ${(tabela[3].innerHTML = element.data)}`;
+    produtos.push(produto);
   });
   produtosSelecionados = data[0];
 };
@@ -145,11 +162,13 @@ const buscarProdutoPorNome = async () => {
   } else {
     try {
       const response = await fetch(
-        `http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`,{
-          method:"GET"
-        });
+        `http://localhost:3000/produtos?nomeProduto=${buscarProdutoInput.value}`,
+        {
+          method: "GET",
+        }
+      );
       const data = await response.json();
-      valorNaoEncontrado(data)
+      valorNaoEncontrado(data);
       mostrarTabela(data);
     } catch (error) {
       console.error(error);
@@ -165,23 +184,44 @@ const limparResultados = () => {
   tabela[4].innerHTML = "";
 };
 
-const deletarProduto = async() => {
+let contarDeletados: number = 0;
+const deletarProduto = async () => {
   try {
-    const data = await fetch(`http://localhost:3000/produtos/${produtosSelecionados.id}`, {
-      method:"DELETE"
-    })
-    const response = await data.json()
+    const data = await fetch(
+      `http://localhost:3000/produtos/${produtosSelecionados.id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const response = await data.json();
     mensagemProdutoDeletado();
     limparResultados();
     mostrarInformacoesProdutos();
-    somarValorProdutos()
-    console.log(produtosSelecionados.id);
-    
+    ++contarDeletados;
+    localStorage.setItem("dados", String(contarDeletados));
+    meusProdutosDeletadosExibir(contarDeletados);
     console.log("Item excluído com sucesso", response);
-  } catch (error) {
-    console.error(error)
+  }catch (error) {
+    console.error(error);
   }
 };
+
+
+const dadosContadosApagados = () => {
+  const recuperarValor = localStorage.getItem("dados");
+  meusProdutosDeletadosExibir(contarDeletados = Number(recuperarValor))
+  console.log(recuperarValor);
+};
+
+const meusProdutosDeletadosExibir = (mostrar: number) => {
+  const mostrarTotalDeletados = document.querySelector(".mostrarTotalDeletados") as HTMLParagraphElement;
+  console.log(mostrarTotalDeletados);
+  mostrarTotalDeletados.innerHTML = `${mostrar}`;
+};
+
+dadosContadosApagados();
+
+
 
 deltarProduto.addEventListener("click", () => {
   deletarProduto();
@@ -211,14 +251,11 @@ const mensagemCategoriaNaoExiste = () => {
   });
 };
 
-
 const thNomeProduto = document.getElementById("nomeProduto") as HTMLElement;
 const tdExibirPreco = document.getElementById("tdExibirPreco") as HTMLElement;
 const tdQuantidadeProduto = document.getElementById("tdQuantidadeProduto") as HTMLElement;
-const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto") as HTMLElement
-const deletarValorTabela = document.getElementById("deletarValorTabela") as HTMLElement
-
-
+const dataDoMeuProduto2 = document.getElementById("dataDoMeuProduto") as HTMLElement;
+const deletarValorTabela = document.getElementById("deletarValorTabela") as HTMLElement;
 
 const buscaPorCriterio = () => {
   if (!obterValorCategoria) {
@@ -228,24 +265,25 @@ const buscaPorCriterio = () => {
   }
 };
 
-
-const buscarProdutosPorCriteriosEspefificos = async ()  => {
+const buscarProdutosPorCriteriosEspefificos = async () => {
   try {
-    const data = await fetch(`http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`, {
-      method: "GET"
-    })
-    const response = await data.json()
+    const data = await fetch(
+      `http://localhost:3000/produtos?categoriaDoproduto=${obterValorCategoria}`,
+      {
+        method: "GET",
+      }
+    );
+    const response = await data.json();
     if (response == false) {
       mensagemCategoriaNaoExiste();
-    } 
-    valores(response)
+    }
+    valores(response);
   } catch (error) {
-    console.error("nao foi possivel buscar pelo criterio.")
+    console.error("nao foi possivel buscar pelo criterio.");
   }
-}
+};
 
-
-let pegarIdTabela: string = ""
+let pegarIdTabela: string = "";
 
 const valores = (data: any) => {
   data.forEach((element: any) => {
@@ -277,38 +315,42 @@ const valores = (data: any) => {
       dataDoMeuProduto2.appendChild(dataDoMeuProduto);
       dataDoMeuProduto.innerHTML = element.data;
     }
-    const button = document.createElement("button") as HTMLButtonElement
+    const button = document.createElement("button") as HTMLButtonElement;
     button.style.display = "block";
     if (button != null) {
       deletarValorTabela.appendChild(button);
       pegarIdTabela = element.id;
-      botaoQuevaiDeletar(button)
+      botaoQuevaiDeletar(button);
     }
   });
-}
+};
 
 const botaoQuevaiDeletar = (button: HTMLButtonElement) => {
-  button.innerHTML = "deletar"
+  button.innerHTML = "deletar";
   button.addEventListener("click", () => {
     deletarDaTabela();
   });
 };
 
-const deletarDaTabela = async() => {
+const deletarDaTabela = async () => {
   try {
-    const data = await fetch(`http://localhost:3000/produtos/${pegarIdTabela}`, {
-      method: "DELETE"
-    })
-    const response = await data.json()
+    const data = await fetch(
+      `http://localhost:3000/produtos/${pegarIdTabela}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const response = await data.json();
     mostrarInformacoesProdutos();
-    somarValorProdutos()
+    somarValorProdutos();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
-
-const botaoPequisarCriterios = document.getElementById("botao-pequisar-criterios") as HTMLButtonElement;
+const botaoPequisarCriterios = document.getElementById(
+  "botao-pequisar-criterios"
+) as HTMLButtonElement;
 botaoPequisarCriterios.addEventListener("click", () => {
   buscaPorCriterio();
 });
